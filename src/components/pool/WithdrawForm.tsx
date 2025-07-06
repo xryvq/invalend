@@ -9,7 +9,6 @@ import { ErrorDisplay } from '@/components/common/ErrorDisplay';
 export const WithdrawForm = () => {
   const {
     amount,
-    setAmount,
     userInfo,
     withdrawableShares,
     isWithdrawing,

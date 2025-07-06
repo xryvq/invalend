@@ -75,16 +75,6 @@ export const DepositForm = () => {
     ? "Approve USDC First"
     : "Deposit USDC";
 
-  const stepText = needsApproval
-    ? isApproving
-      ? "Step 1: Approving..."
-      : "Step 1: Approve USDC Required"
-    : isDepositing
-    ? "Step 2: Depositing..."
-    : isDepositSuccess
-    ? "Step 2: ✅ Deposit Successful"
-    : "Step 2: Ready to Deposit";
-
   return (
     <div className="bg-black rounded-lg p-6 border border-gray-700">
       <div className="space-y-6">

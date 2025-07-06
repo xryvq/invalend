@@ -1,9 +1,6 @@
 import { useCreateLoan, useUserLoanInfo, useRepayLoan } from "@/hooks/useLoan";
 import { formatUSDC } from "@/utils/formatters";
 import { TransactionButton } from "@/components/common/TransactionButton";
-import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
-import { CONTRACT_CONFIGS } from "@/config/contracts";
-import { useState } from "react";
 
 export const BorrowForm = () => {
   const {
@@ -120,21 +117,8 @@ export const BorrowForm = () => {
 
 // RepayForm
 export const RepayForm = () => {
-  const { address } = useAccount();
-  const { loanInfo, refetch } = useUserLoanInfo();
-  const { handleRepay, isRepaying, isRepaySuccess, error, setError } = useRepayLoan();
-
-  // Get user loan info
-  const { data: loanInfoData, refetch: refetchLoanInfo } = useReadContract({
-    ...CONTRACT_CONFIGS.LOAN_MANAGER,
-    functionName: "getLoanInfo",
-    args: [address as `0x${string}`],
-    query: { enabled: !!address },
-  });
-
-  // Repay transaction
-  const { writeContract: repayLoan, data: repayHash } = useWriteContract();
-  const { isLoading: isRepayingTx, isSuccess: isRepayTxSuccess } = useWaitForTransactionReceipt({ hash: repayHash });
+  const { loanInfo } = useUserLoanInfo();
+  const { handleRepay, isRepaying, isRepaySuccess, error } = useRepayLoan();
 
   const activeLoan = loanInfo && loanInfo.loanAmount && loanInfo.isActive;
 

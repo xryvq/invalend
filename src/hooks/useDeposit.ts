@@ -96,10 +96,10 @@ export const useDeposit = () => {
         functionName: "approve",
         args: [CONTRACT_CONFIGS.LENDING_POOL.address, amountRaw],
       });
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Approval error:", err);
       setError(
-        err?.shortMessage || "Approval failed. Check network or gas fees."
+        "Approval failed. Check network or gas fees."
       );
     }
   };
@@ -117,9 +117,9 @@ export const useDeposit = () => {
         functionName: "deposit",
         args: [amountRaw, address],
       });
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Deposit error:", err);
-      setError(err?.shortMessage || "Deposit failed. Check network or limits.");
+      setError("Deposit failed. Check network or limits.");
     }
   };
 

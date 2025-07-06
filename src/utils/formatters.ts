@@ -5,7 +5,7 @@ export const formatUSDC = (amount: bigint | string | number, decimals: number = 
   try {
     const bigIntAmount = typeof amount === 'string' ? BigInt(amount) : BigInt(amount);
     return formatUnits(bigIntAmount, decimals);
-  } catch (error) {
+  } catch {
     return '0';
   }
 };
@@ -14,7 +14,7 @@ export const formatUSDC = (amount: bigint | string | number, decimals: number = 
 export const parseUSDC = (amount: string, decimals: number = 6): bigint => {
   try {
     return parseUnits(amount, decimals);
-  } catch (error) {
+  } catch {
     return BigInt(0);
   }
 };
@@ -36,7 +36,7 @@ export const formatAPY = (basisPoints: bigint | string | number): string => {
     const bp = typeof basisPoints === 'string' ? BigInt(basisPoints) : BigInt(basisPoints);
     const percentage = Number(bp) / 100; // Convert basis points to percentage
     return formatPercentage(percentage);
-  } catch (error) {
+  } catch {
     return '0%';
   }
 };

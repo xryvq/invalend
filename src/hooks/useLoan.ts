@@ -96,9 +96,9 @@ export const useCreateLoan = () => {
           BigInt(2) ** BigInt(256) - BigInt(1),
         ],
       });
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Approval error:", err);
-      setError(err?.shortMessage || "Approval failed.");
+      setError("Approval failed.");
     }
   };
 
@@ -115,9 +115,9 @@ export const useCreateLoan = () => {
         functionName: "createLoan",
         args: [amountRaw],
       });
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("CreateLoan error:", err);
-      setError(err?.shortMessage || "Loan creation failed.");
+      setError("Loan creation failed.");
     }
   };
 
@@ -172,7 +172,6 @@ export const useUserLoanInfo = () => {
 
 // Hook: useRepayLoan
 export const useRepayLoan = () => {
-  const { address } = useAccount();
   const [isRepaying, setIsRepaying] = useState(false);
   const [isRepaySuccess, setIsRepaySuccess] = useState(false);
   const [error, setError] = useState("");
@@ -191,8 +190,9 @@ export const useRepayLoan = () => {
         args: [],
       });
       setIsRepaySuccess(true);
-    } catch (err: any) {
-      setError(err?.shortMessage || "Repay failed.");
+    } catch (err: unknown) {
+      console.error("Repay error:", err);
+      setError("Repay failed.");
     } finally {
       setIsRepaying(false);
     }
